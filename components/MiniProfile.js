@@ -2,7 +2,7 @@ import React from "react";
 
 const MiniProfile = () => {
   return (
-    <div className="flex items-center justify-betwee mt-14 ml-10">
+    <div className="flex items-center justify-between mt-14 ml-10">
       <img
         src="https://pokemonletsgo.pokemon.com/assets/img/common/char-pikachu.png"
         alt="user-image"
