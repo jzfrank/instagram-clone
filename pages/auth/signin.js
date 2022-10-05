@@ -17,7 +17,7 @@ const signin = ({ providers }) => {
             <div key={provider.name} className="flex flex-col items-center">
               <img
                 className="w-32 object-cover"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY6s84djrL0r9tgFfyMUVr6xzx-pUmnvCWlw&usqp=CAU"
+                src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg"
                 alt=""
               />
               <p className="font-sm italic my-10 text-center">
