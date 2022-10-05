@@ -7,11 +7,11 @@ const signin = ({ providers }) => {
     <>
       <Header />
       <div className="flex justify-center space-x-7 mt-20">
-        <img
+        {/* <img
           className="hidden object-cover rotate-6 md:inline-flex md:w-48"
           src="https://www.pngkey.com/png/detail/115-1158024_instagram-phone-1.png"
           alt="instagram-image"
-        />
+        /> */}
         <div className="">
           {Object.values(providers).map((provider) => (
             <div key={provider.name} className="flex flex-col items-center">
