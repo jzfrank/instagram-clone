@@ -114,7 +114,6 @@ const UploadModal = () => {
           </div>
         </Modal>
       )}
-      UploadModal
     </div>
   );
 };
