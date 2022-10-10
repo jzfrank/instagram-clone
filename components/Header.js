@@ -8,10 +8,12 @@ import { HomeIcon } from "@heroicons/react/24/solid";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRecoilState } from "recoil";
 import { modalState } from "../atom/modalAtom";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const { data: session } = useSession();
   const [open, setOpen] = useRecoilState(modalState);
+  const router = useRouter();
 
   console.log("session", session);
   return (
@@ -23,6 +25,7 @@ const Header = () => {
             src="https://logos-world.net/wp-content/uploads/2020/04/Instagram-Logo-2010-2013.png"
             layout="fill"
             className="object-contain"
+            onClick={() => router.push("/")}
           />
         </div>
 
@@ -31,6 +34,7 @@ const Header = () => {
             src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg"
             layout="fill"
             className="object-contain"
+            onClick={() => router.push("/")}
           />
         </div>
 
@@ -47,7 +51,10 @@ const Header = () => {
         </div>
         {/* Right */}
         <div className="flex space-x-4 items-center">
-          <HomeIcon className="hidden md:inline-flex h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out" />
+          <HomeIcon
+            onClick={() => router.push("/")}
+            className="hidden md:inline-flex h-6 cursor-pointer hover:scale-125 transition-transform duration-200 ease-out"
+          />
           {session ? (
             <>
               <PlusCircleIcon
