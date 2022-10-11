@@ -6,6 +6,7 @@ import {
   BookmarkIcon,
   FaceSmileIcon,
 } from "@heroicons/react/24/outline";
+import { HeartIcon as HeartFilledIcon } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
 import {
   addDoc,
@@ -14,6 +15,9 @@ import {
   orderBy,
   query,
   serverTimestamp,
+  setDoc,
+  doc,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import Moment from "react-moment";
@@ -22,6 +26,8 @@ const Post = ({ id, username, img, userImg, caption }) => {
   const { data: session } = useSession();
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
+  const [likes, setLikes] = useState([]);
+  const [hasLiked, setHasLiked] = useState(false);
   useEffect(() => {
     const unsubscribe = onSnapshot(
       query(
@@ -31,6 +37,24 @@ const Post = ({ id, username, img, userImg, caption }) => {
       (snapshot) => setComments(snapshot.docs)
     );
   }, [db, id]);
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(db, "posts", id, "likes"),
+      (snapshot) => setLikes(snapshot.docs)
+    );
+  }, [db, id]);
+  useEffect(() => {
+    setHasLiked(likes.findIndex((like) => like.id === session.user.uid) !== -1);
+  }, [likes]);
+  const likePost = async () => {
+    if (hasLiked) {
+      await deleteDoc(doc(db, "posts", id, "likes", session?.user.uid));
+    } else {
+      await setDoc(doc(db, "posts", id, "likes", session?.user.uid), {
+        username: session.user.username,
+      });
+    }
+  };
   const sendComment = async (event) => {
     event.preventDefault();
     const commentToSend = comment;
@@ -62,7 +86,13 @@ const Post = ({ id, username, img, userImg, caption }) => {
       {session && (
         <div className="flex justify-between p-4">
           <div className="flex space-x-4">
-            <HeartIcon className="btn" />
+            {hasLiked && (
+              <HeartFilledIcon
+                onClick={likePost}
+                className="text-red-400 btn"
+              />
+            )}
+            {!hasLiked && <HeartIcon onClick={likePost} className="btn" />}
             <ChatBubbleLeftEllipsisIcon className="btn" />
           </div>
           <BookmarkIcon className="btn" />
