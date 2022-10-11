@@ -44,7 +44,9 @@ const Post = ({ id, username, img, userImg, caption }) => {
     );
   }, [db, id]);
   useEffect(() => {
-    setHasLiked(likes.findIndex((like) => like.id === session.user.uid) !== -1);
+    setHasLiked(
+      likes.findIndex((like) => like.id === session?.user.uid) !== -1
+    );
   }, [likes]);
   const likePost = async () => {
     if (hasLiked) {
@@ -86,13 +88,15 @@ const Post = ({ id, username, img, userImg, caption }) => {
       {session && (
         <div className="flex justify-between p-4">
           <div className="flex space-x-4">
-            {hasLiked && (
+            {hasLiked ? (
               <HeartFilledIcon
                 onClick={likePost}
                 className="text-red-400 btn"
               />
+            ) : (
+              <HeartIcon onClick={likePost} className="btn" />
             )}
-            {!hasLiked && <HeartIcon onClick={likePost} className="btn" />}
+
             <ChatBubbleLeftEllipsisIcon className="btn" />
           </div>
           <BookmarkIcon className="btn" />
