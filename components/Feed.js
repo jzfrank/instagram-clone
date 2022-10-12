@@ -9,7 +9,8 @@ const Feed = () => {
   const { data: session } = useSession();
   return (
     <main
-      className={`p-5 grid ${
+      className={` 
+      p-5 grid ${
         session
           ? "grid-cols-1 lg:grid-cols-3 lg:max-w-6xl mx-auto"
           : "grid-cols-1 lg:grid-cols-2 lg:max-w-3xl mx-auto"
@@ -21,8 +22,11 @@ const Feed = () => {
         {/* posts */}
         <Posts />
       </section>
-      <section className="hidden md:col-span-1 md:inline-grid p-1 ml-10">
-        <div className="fixed max-w-[380px]">
+      <section
+        className="hidden 
+      md:col-span-1 md:inline-grid ml-10 mt-8"
+      >
+        <div className="fixed max-w-[380px] bg-white rounded-md p-8">
           {/* mini profile */}
           <MiniProfile />
           {/* suggestion */}

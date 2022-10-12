@@ -19,7 +19,7 @@ const Suggestions = () => {
         <h3 className="font-bold text-gray-400">Suggestions for you</h3>
         <button className="text-gray-600 font-semibold">See all</button>
       </div>
-      {suggestions.map((suggestion) => (
+      {suggestions.map((suggestion, index) => (
         <div
           className="flex items-center justify-between mt-3"
           key={suggestion.id}
@@ -32,9 +32,9 @@ const Suggestions = () => {
             alt=""
           />
           <div className="flex-1 ml-4">
-            <h2 className="font-semibold text-sm">{suggestion.username}</h2>
+            <h2 className="font-semibold text-sm">{`user_${index}`}</h2>
             <h3 className="text-sm text-gray-400 truncate max-w-[230px]">
-              {suggestion.jobTitle}
+              {`jobTitle_${index}`}
             </h3>
           </div>
           <button className="font-semibold text-blue-400 text-sm">

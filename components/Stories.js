@@ -19,7 +19,7 @@ const Stories = () => {
   return (
     <div
       className="flex space-x-2 p-6 bg-white mt-8
-     border-gray-200 border overflow-x-scroll rounded-sm scrollbar-none"
+     border-gray-200 border overflow-x-scroll rounded-md scrollbar-none"
     >
       {session && (
         <Story
@@ -28,8 +28,8 @@ const Stories = () => {
           isUser={true}
         />
       )}
-      {storyUsers.map((user) => (
-        <Story key={user.id} username={user.username} img={user.img} />
+      {storyUsers.map((user, index) => (
+        <Story key={user.id} username={`user_${index}`} img={user.img} />
       ))}
     </div>
   );
